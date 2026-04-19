@@ -70,6 +70,26 @@ function initAds() {
   }
 }
 
+function checkAdStatus() {
+  const ads = document.querySelectorAll('.adsbygoogle');
+  ads.forEach(ad => {
+    const status = ad.getAttribute('data-ad-status');
+    const parent = ad.closest('.ad-placeholder');
+    
+    if (status === 'unfilled' && parent && !parent.classList.contains('is-unfilled')) {
+      parent.classList.add('is-unfilled');
+      parent.innerHTML += `
+        <div class="mock-content">
+          <div class="mock-icon">🚀</div>
+          <div class="mock-title">Support JSON Checker</div>
+          <div class="mock-text">Star us on GitHub to support free developer tools!</div>
+          <a href="https://github.com/jsonchecker" target="_blank" class="btn-sm" style="margin-top:5px">View GitHub</a>
+        </div>
+      `;
+    }
+  });
+}
+
 // ── Year in footer ──
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -138,6 +158,12 @@ window.addEventListener('popstate', () => {
   }
 
   initAds();
+  // Check status every 2 seconds for a total of 10 seconds to catch the async load
+  let checks = 0;
+  const interval = setInterval(() => {
+    checkAdStatus();
+    if (++checks > 5) clearInterval(interval);
+  }, 2000);
 });
 
 // Re-check ads on resize (e.g., when sidebars become visible)
