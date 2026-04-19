@@ -21,13 +21,20 @@ function trackEvent(eventName, params = {}) {
 // ── AdSense Debugger ──
 function debugAds() {
   setTimeout(() => {
+    if (window.location.protocol === 'file:') {
+      console.error('%c[AdSense Error] You are viewing the page via file:// protocol. AdSense will NOT load ads from a local file. Use a local web server (e.g., Live Server or npx serve).', 'color: #ff4d6a; font-weight: bold;');
+      return;
+    }
+
     const ads = document.querySelectorAll('.adsbygoogle');
-    console.group('AdSense Debug Report');
+    console.group('%c[AdSense Status Report]', 'color: #00c896; font-weight: bold; border-left: 3px solid #00c896; padding-left: 8px;');
     ads.forEach((ad, i) => {
-      const status = ad.getAttribute('data-ad-status') || 'not-initialized';
-      const slot = ad.getAttribute('data-ad-slot');
-      console.log(`Slot [${slot || i}]: ${status}`);
-      if (status === 'unfilled') {
+      const status = ad.getAttribute('data-ad-status') || 'waiting/not-initialized';
+      const slot = ad.getAttribute('data-ad-slot') || 'auto-injected';
+      const dim = `${ad.offsetWidth}x${ad.offsetHeight}`;
+      console.log(`Slot: ${slot || i} | Status: ${status} | Size: ${dim}`);
+      
+      if (status === 'unfilled' || (status === 'filled' && ad.offsetHeight === 0)) {
         console.warn(`Slot ${slot} was not filled. Check AdSense dashboard for site approval or demand issues.`);
       }
     });
@@ -40,8 +47,12 @@ function initAds() {
   try {
     // Only push to ads that haven't been initialized and are currently visible
     const ads = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
+    if (ads.length > 0) console.log(`[AdSense] Found ${ads.length} new slots to initialize.`);
     ads.forEach(ad => {
-      if (ad.offsetWidth > 0) {
+      const slotId = ad.getAttribute('data-ad-slot');
+      // Ensure slot has width and isn't already being processed by Auto Ads
+      if (ad.offsetWidth > 0 && !ad.getAttribute('data-adsbygoogle-status')) {
+        console.log(`[AdSense] Initializing visible slot: ${slotId || 'auto'}`);
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     });
@@ -117,10 +128,8 @@ window.addEventListener('popstate', () => {
     switchTool(hash);
   }
   
-  // Run ad debugger in development
-  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-    debugAds();
-  }
+  // Run ad debugger
+  debugAds();
 
   initAds();
 });
@@ -410,5 +419,6 @@ window.addEventListener('DOMContentLoaded', () => {
     switchTool(hash);
   }
 
+  debugAds();
   initAds();
 });

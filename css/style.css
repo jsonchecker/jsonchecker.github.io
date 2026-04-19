@@ -216,6 +216,14 @@ a:hover { text-decoration: underline; }
   font-family: var(--font-code);
   background: var(--bg-surface2);
 }
+.ad-placeholder .adsbygoogle {
+  flex: 1;
+  width: 100%;
+  min-height: 50px;
+}
+.adsbygoogle[data-ad-status="filled"] + span {
+  display: none;
+}
 .ad-placeholder--vertical {
   width: 160px;
   height: 600px;
