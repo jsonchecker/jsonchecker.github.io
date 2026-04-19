@@ -50,6 +50,15 @@ function switchTool(tool) {
   document.querySelectorAll('.tool-panel').forEach(panel => {
     panel.classList.toggle('active', panel.id === 'tool-' + tool);
   });
+
+  // Track tool selection event
+  if (typeof gtag === 'function') {
+    gtag('event', 'select_content', {
+      content_type: 'tool',
+      item_id: tool
+    });
+  }
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 

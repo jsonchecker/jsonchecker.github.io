@@ -18,6 +18,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
+  <!-- Google Analytics (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
@@ -38,6 +48,10 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-55RH5D2B"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <!-- ═══════════════ HEADER ═══════════════ -->
   <header class="site-header">
@@ -72,21 +86,6 @@
     </div>
   </header>
 
-  <!-- ═══════════════ AD SLOT — TOP BANNER ═══════════════ -->
-  <div class="ad-slot ad-slot--banner" aria-label="Advertisement">
-    <div class="ad-placeholder">
-      <!-- AdSense Banner 728x90 -->
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-2046967762235290"
-           data-ad-slot="XXXXXXXXXX"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      <span>Advertisement</span>
-    </div>
-  </div>
-
   <!-- ═══════════════ MAIN ═══════════════ -->
   <main class="main-layout">
 
@@ -97,7 +96,7 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-2046967762235290"
-             data-ad-slot="XXXXXXXXXX"
+             data-ad-slot="INSERT_LEFT_SIDEBAR_SLOT_ID_HERE"
              data-ad-format="auto"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         <span>Ad</span>
@@ -285,7 +284,7 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-2046967762235290"
-             data-ad-slot="XXXXXXXXXX"
+             data-ad-slot="INSERT_RIGHT_SIDEBAR_SLOT_ID_HERE"
              data-ad-format="auto"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         <span>Ad</span>
@@ -301,7 +300,7 @@
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-2046967762235290"
-           data-ad-slot="XXXXXXXXXX"
+           data-ad-slot="INSERT_MIDDLE_BANNER_SLOT_ID_HERE"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
