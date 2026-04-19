@@ -69,8 +69,22 @@ function switchTool(tool) {
   // Track tool selection via Google Tag Manager DataLayer
   trackEvent('tool_switch', { tool_name: tool });
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Update URL hash without jumping
+  if (history.pushState) {
+    history.pushState(null, null, '#' + tool);
+  } else {
+    location.hash = '#' + tool;
+  }
 }
+
+// ── Handle initial load and back/forward ──
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.replace('#', '');
+  const validTools = ['validator', 'formatter', 'minifier', 'tree'];
+  if (validTools.includes(hash)) {
+    switchTool(hash);
+  }
+});
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => switchTool(btn.dataset.tool));
@@ -343,3 +357,12 @@ function escHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
+
+// Initialize tool based on URL hash
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '');
+  const validTools = ['validator', 'formatter', 'minifier', 'tree'];
+  if (validTools.includes(hash)) {
+    switchTool(hash);
+  }
+});
