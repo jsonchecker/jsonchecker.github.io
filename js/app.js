@@ -18,6 +18,38 @@ function trackEvent(eventName, params = {}) {
   }
 }
 
+// ── AdSense Debugger ──
+function debugAds() {
+  setTimeout(() => {
+    const ads = document.querySelectorAll('.adsbygoogle');
+    console.group('AdSense Debug Report');
+    ads.forEach((ad, i) => {
+      const status = ad.getAttribute('data-ad-status') || 'not-initialized';
+      const slot = ad.getAttribute('data-ad-slot');
+      console.log(`Slot [${slot || i}]: ${status}`);
+      if (status === 'unfilled') {
+        console.warn(`Slot ${slot} was not filled. Check AdSense dashboard for site approval or demand issues.`);
+      }
+    });
+    console.groupEnd();
+  }, 3000); // Wait for scripts to execute
+}
+
+// ── AdSense Initialization ──
+function initAds() {
+  try {
+    // Only push to ads that haven't been initialized and are currently visible
+    const ads = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
+    ads.forEach(ad => {
+      if (ad.offsetWidth > 0) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    });
+  } catch (e) {
+    console.error('[AdSense] Safe push failed', e);
+  }
+}
+
 // ── Year in footer ──
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -84,7 +116,17 @@ window.addEventListener('popstate', () => {
   if (validTools.includes(hash)) {
     switchTool(hash);
   }
+  
+  // Run ad debugger in development
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    debugAds();
+  }
+
+  initAds();
 });
+
+// Re-check ads on resize (e.g., when sidebars become visible)
+window.addEventListener('resize', initAds);
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => switchTool(btn.dataset.tool));
@@ -367,4 +409,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (validTools.includes(hash)) {
     switchTool(hash);
   }
+
+  initAds();
 });
