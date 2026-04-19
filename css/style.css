@@ -203,26 +203,32 @@ a:hover { text-decoration: underline; }
   border-bottom: 1px solid var(--border);
 }
 .ad-placeholder {
+  position: relative;
   width: 100%;
   max-width: 728px;
   height: 90px;
   border: 1px dashed var(--border);
   border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   color: var(--text-3);
   font-size: 0.75rem;
   font-family: var(--font-code);
   background: var(--bg-surface2);
+  overflow: hidden;
 }
 .ad-placeholder .adsbygoogle {
-  flex: 1;
+  position: relative;
+  z-index: 2;
   width: 100%;
-  min-height: 50px;
+  height: 100%;
 }
-.adsbygoogle[data-ad-status="filled"] + span {
-  display: none;
+.ad-placeholder > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
 }
 .ad-placeholder--vertical {
   width: 160px;

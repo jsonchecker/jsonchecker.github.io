@@ -45,16 +45,18 @@ function debugAds() {
 // ── AdSense Initialization ──
 function initAds() {
   try {
-    // Only push to ads that haven't been initialized and are currently visible
-    const ads = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
-    if (ads.length > 0) console.log(`[AdSense] Found ${ads.length} new slots to initialize.`);
-    ads.forEach(ad => {
-      const slotId = ad.getAttribute('data-ad-slot');
-      // Ensure slot has width and isn't already being processed by Auto Ads
-      if (ad.offsetWidth > 0 && !ad.getAttribute('data-adsbygoogle-status')) {
-        console.log(`[AdSense] Initializing visible slot: ${slotId || 'auto'}`);
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      }
+    requestAnimationFrame(() => {
+      // Only push to ads that haven't been initialized and are currently visible
+      const ads = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
+      if (ads.length > 0) console.log(`[AdSense] Found ${ads.length} new slots to initialize.`);
+      ads.forEach(ad => {
+        const slotId = ad.getAttribute('data-ad-slot');
+        // Ensure slot has width and isn't already being processed by Auto Ads
+        if (ad.offsetWidth > 0 && !ad.getAttribute('data-adsbygoogle-status')) {
+          console.log(`[AdSense] Initializing visible slot: ${slotId || 'auto'}`);
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+      });
     });
   } catch (e) {
     console.error('[AdSense] Safe push failed', e);
