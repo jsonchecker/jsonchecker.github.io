@@ -9,9 +9,6 @@ function trackEvent(eventName, params = {}) {
     window.dataLayer = window.dataLayer || [];
     const payload = { event: eventName, ...params };
     
-    // Debugging: Log the event to console to verify execution
-    console.log(`[Analytics] Pushing event: ${eventName}`, params);
-    
     window.dataLayer.push(payload);
   } catch (err) {
     console.error('[Analytics] Failed to push to dataLayer', err);
@@ -45,16 +42,20 @@ function debugAds() {
 // ── AdSense Initialization ──
 function initAds() {
   try {
+    console.log('[AdSense] Checking for ad slots...');
     requestAnimationFrame(() => {
-      // Only push to ads that haven't been initialized and are currently visible
+      const allAds = document.querySelectorAll('.adsbygoogle');
       const ads = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
-      if (ads.length > 0) console.log(`[AdSense] Found ${ads.length} new slots to initialize.`);
+      
+      console.log(`[AdSense] Total slots: ${allAds.length} | Pending: ${ads.length}`);
+
       ads.forEach(ad => {
         const slotId = ad.getAttribute('data-ad-slot');
-        // Ensure slot has width and isn't already being processed by Auto Ads
         if (ad.offsetWidth > 0 && !ad.getAttribute('data-adsbygoogle-status')) {
-          console.log(`[AdSense] Initializing visible slot: ${slotId || 'auto'}`);
+          console.log(`[AdSense] Requesting ad for slot: ${slotId || 'auto'}`);
           (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } else if (ad.offsetWidth === 0) {
+          console.warn(`[AdSense] Skipping slot ${slotId}: Element is hidden (width=0)`);
         }
       });
     });
