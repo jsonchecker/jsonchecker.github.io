@@ -3,6 +3,15 @@
    All tools: Validator, Formatter, Minifier, Tree Viewer
 ═══════════════════════════════════════ */
 
+// ── Analytics Helper ──
+function trackEvent(eventName, params = {}) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: eventName,
+    ...params
+  });
+}
+
 // ── Year in footer ──
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -51,13 +60,8 @@ function switchTool(tool) {
     panel.classList.toggle('active', panel.id === 'tool-' + tool);
   });
 
-  // Track tool selection event
-  if (typeof gtag === 'function') {
-    gtag('event', 'select_content', {
-      content_type: 'tool',
-      item_id: tool
-    });
-  }
+  // Track tool selection via Google Tag Manager DataLayer
+  trackEvent('tool_switch', { tool_name: tool });
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -77,6 +81,12 @@ function copyOutput(textareaId) {
   const el = document.getElementById(textareaId);
   if (!el || !el.value) return;
   navigator.clipboard.writeText(el.value).then(() => {
+    // Track successful copy action
+    trackEvent('copy_to_clipboard', { 
+      tool_id: textareaId.split('-')[0],
+      char_count: el.value.length 
+    });
+
     const btn = document.querySelector(`[onclick="copyOutput('${textareaId}')"]`);
     if (btn) { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 1800); }
   });
