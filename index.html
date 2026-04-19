@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON Checker — Free Online JSON Validator, Formatter & Tools</title>
+  <meta name="description" content="Free online JSON tools — validate, format, minify, and visualize JSON instantly. No signup required. Fast, private, and works in your browser." />
+  <meta name="keywords" content="json validator, json formatter, json linter, json minifier, json tree viewer, json checker, validate json online, format json online" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="JSON Checker — Free Online JSON Tools" />
+  <meta property="og:description" content="Validate, format, minify and explore JSON in your browser. Free, fast, no signup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jsonchecker.github.io" />
+  <link rel="canonical" href="https://jsonchecker.github.io" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Checker",
+    "url": "https://jsonchecker.github.io",
+    "description": "Free online JSON tools — validate, format, minify, and visualize JSON instantly.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0" }
+  }
+  </script>
+
+  <!-- AdSense — replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-bracket">{</span>
+        <span class="logo-text">JSON<strong>Checker</strong></span>
+        <span class="logo-bracket">}</span>
+      </a>
+      <nav class="tab-nav" role="tablist" aria-label="JSON Tools">
+        <button class="tab-btn active" role="tab" data-tool="validator" aria-selected="true">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          Validator
+        </button>
+        <button class="tab-btn" role="tab" data-tool="formatter" aria-selected="false">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h7a1 1 0 110 2H4a1 1 0 01-1-1z"/></svg>
+          Formatter
+        </button>
+        <button class="tab-btn" role="tab" data-tool="minifier" aria-selected="false">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zm6 0a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zm5 3a1 1 0 00-1 1v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+          Minifier
+        </button>
+        <button class="tab-btn" role="tab" data-tool="tree" aria-selected="false">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg>
+          Tree Viewer
+        </button>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════ AD SLOT — TOP BANNER ═══════════════ -->
+  <div class="ad-slot ad-slot--banner" aria-label="Advertisement">
+    <div class="ad-placeholder">
+      <!-- AdSense Banner 728x90 -->
+      <!--
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <span>Advertisement</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MAIN ═══════════════ -->
+  <main class="main-layout">
+
+    <!-- LEFT AD SLOT -->
+    <aside class="ad-slot ad-slot--side ad-slot--left" aria-label="Advertisement">
+      <div class="ad-placeholder ad-placeholder--vertical">
+        <!-- AdSense 160x600 -->
+        <!--
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
+        <span>Ad</span>
+      </div>
+    </aside>
+
+    <!-- TOOL AREA -->
+    <section class="tool-area">
+
+      <!-- ── VALIDATOR ── -->
+      <div class="tool-panel active" id="tool-validator">
+        <div class="tool-header">
+          <h1 class="tool-title">JSON Validator</h1>
+          <p class="tool-desc">Paste your JSON below to instantly check for syntax errors.</p>
+        </div>
+        <div class="editor-layout">
+          <div class="editor-pane">
+            <div class="editor-toolbar">
+              <span class="editor-label">Input</span>
+              <div class="editor-actions">
+                <button class="btn-sm" onclick="loadSample('validator')">Sample</button>
+                <button class="btn-sm" onclick="clearTool('validator')">Clear</button>
+              </div>
+            </div>
+            <textarea id="validator-input" class="code-editor" spellcheck="false" placeholder='Paste your JSON here, e.g. {"name": "JSON Checker"}'></textarea>
+          </div>
+          <div class="editor-center">
+            <button class="run-btn" onclick="runValidator()">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+              Validate
+            </button>
+          </div>
+          <div class="editor-pane">
+            <div class="editor-toolbar">
+              <span class="editor-label">Result</span>
+            </div>
+            <div id="validator-output" class="output-panel output-idle">
+              <div class="output-idle-msg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Your validation result will appear here</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="faq-section">
+          <h2>What is a JSON Validator?</h2>
+          <p>A JSON validator checks whether your JSON text is syntactically correct according to the <a href="https://www.json.org" target="_blank" rel="noopener">JSON specification (RFC 8259)</a>. Common errors include missing commas, unquoted keys, trailing commas, and mismatched brackets.</p>
+          <h2>Why is my JSON invalid?</h2>
+          <p>The most common JSON errors are: missing or extra commas, keys not wrapped in double quotes, single quotes instead of double quotes, trailing commas after the last item, and unclosed braces or brackets.</p>
+        </div>
+      </div>
+
+      <!-- ── FORMATTER ── -->
+      <div class="tool-panel" id="tool-formatter">
+        <div class="tool-header">
+          <h1 class="tool-title">JSON Formatter & Beautifier</h1>
+          <p class="tool-desc">Prettify minified or messy JSON with proper indentation.</p>
+        </div>
+        <div class="editor-layout">
+          <div class="editor-pane">
+            <div class="editor-toolbar">
+              <span class="editor-label">Input</span>
+              <div class="editor-actions">
+                <label class="indent-label">Indent:
+                  <select id="indent-size" class="indent-select">
+                    <option value="2" selected>2 spaces</option>
+                    <option value="4">4 spaces</option>
+                    <option value="tab">Tab</option>
+                  </select>
+                </label>
+                <button class="btn-sm" onclick="loadSample('formatter')">Sample</button>
+                <button class="btn-sm" onclick="clearTool('formatter')">Clear</button>
+              </div>
+            </div>
+            <textarea id="formatter-input" class="code-editor" spellcheck="false" placeholder='Paste minified JSON here...'></textarea>
+          </div>
+          <div class="editor-center">
+            <button class="run-btn" onclick="runFormatter()">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+              Format
+            </button>
+          </div>
+          <div class="editor-pane">
+            <div class="editor-toolbar">
+              <span class="editor-label">Output</span>
+              <div class="editor-actions">
+                <button class="btn-sm" id="formatter-copy-btn" onclick="copyOutput('formatter-output-text')">Copy</button>
+              </div>
+            </div>
+            <textarea id="formatter-output-text" class="code-editor code-editor--output" readonly spellcheck="false" placeholder="Formatted JSON will appear here..."></textarea>
+          </div>
+        </div>
+        <div class="faq-section">
+          <h2>What is JSON Formatting?</h2>
+          <p>JSON formatting (or beautifying) adds proper indentation and line breaks to compressed JSON, making it human-readable. This is especially useful when working with API responses or configuration files.</p>
+        </div>
+      </div>
+
+      <!-- ── MINIFIER ── -->
+      <div class="tool-panel" id="tool-minifier">
+        <div class="tool-header">
+          <h1 class="tool-title">JSON Minifier</h1>
+          <p class="tool-desc">Strip whitespace from JSON to reduce file size for production use.</p>
+        </div>
+        <div class="editor-layout">
+          <div class="editor-pane">
+            <div class="editor-toolbar">
+              <span class="editor-label">Input</span>
+              <div class="editor-actions">
+                <button class="btn-sm" onclick="loadSample('minifier')">Sample</button>
+                <button class="btn-sm" onclick="clearTool('minifier')">Clear</button>
+              </div>
+            </div>
+            <textarea id="minifier-input" class="code-editor" spellcheck="false" placeholder="Paste formatted JSON here..."></textarea>
+          </div>
+          <div class="editor-center">
+            <button class="run-btn" onclick="runMinifier()">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+              Minify
+            </button>
+          </div>
+          <div class="editor-pane">
+            <div class="editor-toolbar">
+              <span class="editor-label">Output</span>
+              <div class="editor-actions">
+                <span id="minifier-savings" class="savings-badge"></span>
+                <button class="btn-sm" id="minifier-copy-btn" onclick="copyOutput('minifier-output-text')">Copy</button>
+              </div>
+            </div>
+            <textarea id="minifier-output-text" class="code-editor code-editor--output" readonly spellcheck="false" placeholder="Minified JSON will appear here..."></textarea>
+          </div>
+        </div>
+        <div class="faq-section">
+          <h2>Why Minify JSON?</h2>
+          <p>Minifying JSON removes all unnecessary whitespace characters, reducing file size — often by 20–40%. This speeds up API responses and reduces bandwidth usage in production environments.</p>
+        </div>
+      </div>
+
+      <!-- ── TREE VIEWER ── -->
+      <div class="tool-panel" id="tool-tree">
+        <div class="tool-header">
+          <h1 class="tool-title">JSON Tree Viewer</h1>
+          <p class="tool-desc">Explore JSON as an interactive, collapsible tree structure.</p>
+        </div>
+        <div class="tree-layout">
+          <div class="editor-pane tree-input-pane">
+            <div class="editor-toolbar">
+              <span class="editor-label">Input</span>
+              <div class="editor-actions">
+                <button class="btn-sm" onclick="loadSample('tree')">Sample</button>
+                <button class="btn-sm" onclick="clearTool('tree')">Clear</button>
+                <button class="run-btn run-btn--sm" onclick="runTree()">View Tree</button>
+              </div>
+            </div>
+            <textarea id="tree-input" class="code-editor" spellcheck="false" placeholder="Paste JSON here to explore as a tree..."></textarea>
+          </div>
+          <div class="editor-pane tree-output-pane">
+            <div class="editor-toolbar">
+              <span class="editor-label">Tree</span>
+              <div class="editor-actions">
+                <button class="btn-sm" onclick="expandAll()">Expand All</button>
+                <button class="btn-sm" onclick="collapseAll()">Collapse All</button>
+              </div>
+            </div>
+            <div id="tree-output" class="tree-panel">
+              <div class="output-idle-msg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h18M3 12h12M3 17h6"/></svg>
+                <span>Your JSON tree will appear here</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="faq-section">
+          <h2>What is a JSON Tree Viewer?</h2>
+          <p>A JSON tree viewer renders JSON as a collapsible hierarchical tree, making it easy to navigate deeply nested structures. Click any node to expand or collapse it.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RIGHT AD SLOT -->
+    <aside class="ad-slot ad-slot--side ad-slot--right" aria-label="Advertisement">
+      <div class="ad-placeholder ad-placeholder--vertical">
+        <!-- AdSense 160x600 -->
+        <!--
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
+        <span>Ad</span>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ═══════════════ AD SLOT — MIDDLE BANNER ═══════════════ -->
+  <div class="ad-slot ad-slot--banner" aria-label="Advertisement">
+    <div class="ad-placeholder">
+      <!-- AdSense Banner -->
+      <!--
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <span>Advertisement</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-bracket">{</span><strong>JSONChecker</strong><span class="logo-bracket">}</span>
+        <p>Free JSON tools for developers. No signup, no tracking, no nonsense.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Tools</h3>
+        <ul>
+          <li><a href="#" onclick="switchTool('validator')">JSON Validator</a></li>
+          <li><a href="#" onclick="switchTool('formatter')">JSON Formatter</a></li>
+          <li><a href="#" onclick="switchTool('minifier')">JSON Minifier</a></li>
+          <li><a href="#" onclick="switchTool('tree')">JSON Tree Viewer</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="https://www.json.org" target="_blank" rel="noopener">JSON.org</a></li>
+          <li><a href="https://jsonapi.org" target="_blank" rel="noopener">JSON API Spec</a></li>
+          <li><a href="https://json-schema.org" target="_blank" rel="noopener">JSON Schema</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> JSONChecker. All tools run entirely in your browser — your data never leaves your device.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
