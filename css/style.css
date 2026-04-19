@@ -242,8 +242,8 @@ a:hover { text-decoration: underline; }
   margin: 0 auto;
   padding: 24px 20px;
   display: grid;
-  grid-template-columns: 170px minmax(0, 1fr) 170px;
-  grid-template-areas: "left-sidebar main-content right-sidebar";
+  grid-template-columns: minmax(0, 1fr) 170px;
+  grid-template-areas: "main-content right-sidebar";
   gap: 20px;
   align-items: start;
 }
@@ -251,10 +251,6 @@ a:hover { text-decoration: underline; }
 .tool-area {
   grid-area: main-content;
   min-width: 0; /* Prevents content from blowing out the grid width */
-}
-
-.ad-slot--left {
-  grid-area: left-sidebar;
 }
 
 .ad-slot--right {

@@ -129,9 +129,6 @@ window.addEventListener('popstate', () => {
   if (validTools.includes(hash)) {
     switchTool(hash);
   }
-  
-  // Run ad debugger
-  debugAds();
 
   initAds();
 });
@@ -421,6 +418,5 @@ window.addEventListener('DOMContentLoaded', () => {
     switchTool(hash);
   }
 
-  debugAds();
   initAds();
 });
