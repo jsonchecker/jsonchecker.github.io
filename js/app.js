@@ -5,11 +5,17 @@
 
 // ── Analytics Helper ──
 function trackEvent(eventName, params = {}) {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: eventName,
-    ...params
-  });
+  try {
+    window.dataLayer = window.dataLayer || [];
+    const payload = { event: eventName, ...params };
+    
+    // Debugging: Log the event to console to verify execution
+    console.log(`[Analytics] Pushing event: ${eventName}`, params);
+    
+    window.dataLayer.push(payload);
+  } catch (err) {
+    console.error('[Analytics] Failed to push to dataLayer', err);
+  }
 }
 
 // ── Year in footer ──
