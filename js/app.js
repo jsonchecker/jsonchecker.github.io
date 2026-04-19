@@ -78,14 +78,15 @@ function checkAdStatus() {
     
     if (status === 'unfilled' && parent && !parent.classList.contains('is-unfilled')) {
       parent.classList.add('is-unfilled');
-      parent.innerHTML += `
-        <div class="mock-content">
-          <div class="mock-icon">🚀</div>
-          <div class="mock-title">Support JSON Checker</div>
-          <div class="mock-text">Star us on GitHub to support free developer tools!</div>
-          <a href="https://github.com/jsonchecker" target="_blank" class="btn-sm" style="margin-top:5px">View GitHub</a>
-        </div>
+      const mockDiv = document.createElement('div');
+      mockDiv.className = 'mock-content';
+      mockDiv.innerHTML = `
+        <div class="mock-icon">🚀</div>
+        <div class="mock-title">Support JSON Checker</div>
+        <div class="mock-text">Star us on GitHub to support free developer tools!</div>
+        <a href="https://github.com/jsonchecker" target="_blank" class="btn-sm" style="margin-top:5px">View GitHub</a>
       `;
+      parent.appendChild(mockDiv);
     }
   });
 }
