@@ -43,6 +43,8 @@ function debugAds() {
 function initAds() {
   try {
     console.log('[AdSense] Checking for ad slots...');
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
     requestAnimationFrame(() => {
       const allAds = document.querySelectorAll('.adsbygoogle');
       const ads = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
@@ -50,6 +52,10 @@ function initAds() {
       console.log(`[AdSense] Total slots: ${allAds.length} | Pending: ${ads.length}`);
 
       ads.forEach(ad => {
+        if (isLocal) {
+          ad.setAttribute('data-adtest', 'on');
+        }
+
         const slotId = ad.getAttribute('data-ad-slot');
         if (ad.offsetWidth > 0 && !ad.getAttribute('data-adsbygoogle-status')) {
           console.log(`[AdSense] Requesting ad for slot: ${slotId || 'auto'}`);
